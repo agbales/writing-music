@@ -29,7 +29,9 @@ export default class Cards extends React.Component {
                         return(
                             <li key={index} className="flex-item">
                                 <CardPanel>
-                                    <img src={listing.albumcover} 
+                                    <img 
+                                        src={listing.albumcover} 
+                                        className="shadow"
                                         style={ {maxHeight: "200px", width: "100%", objectFit: "contain"} } 
                                     />
                                     <h5>{listing.artist}</h5>
