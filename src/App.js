@@ -70,7 +70,7 @@ class App extends Component {
           </Col>
           <Col s={12} m={10}>
             <header className="App-header">
-              <h1 className="App-title">Music for Writing</h1>
+              <h1 className="App-title">Writing Music</h1>
             </header>
             <Cards listings={this.state.listings} updateNowPlaying={this.updateNowPlaying} test={this.test}/>
           </Col>  
