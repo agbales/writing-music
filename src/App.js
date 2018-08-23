@@ -49,24 +49,26 @@ class App extends Component {
   }
 
   render() {
-    
-    let musicPlayerStyles = {
-      width: "250px"
-    }
 
     if (this.state.nowPlaying.includes('spotify')) {
-      musicPlayerStyles.height = "550px";
+      let win = window.open(this.state.nowPlaying, '_blank');
+      win.focus();
     }
 
     return (
       <div className="App">
         <Row>
           <Col s={2}>
-            <iframe id="music-player"
-                    style={ musicPlayerStyles } 
-                    title="now-playing"
-                    src={this.state.nowPlaying}>
-            </iframe>
+            { this.state.nowPlaying.includes('spotify')
+                ? (<div class="redirect-msg">
+                      <p>Opening music in new tab.</p>
+                    </div>)
+                : (<iframe id="music-player" 
+                            title="now-playing"
+                            allowtransparency="true"
+                            src={this.state.nowPlaying}>
+                    </iframe>)
+            }
           </Col>
           <Col s={12} m={10}>
             <header className="App-header">
