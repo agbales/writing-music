@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GetSheetDone from 'get-sheet-done';
 import Cards from './components/cards.jsx';
 import {Row, Col} from 'react-materialize';
-
 import './App.css';
 
 class App extends Component {
