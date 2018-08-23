@@ -36,7 +36,6 @@ class App extends Component {
     const spreadsheetId = "1SKdOtCncMCtEr7yFrnRi9ggZxgIFOXwxTPQ47vjr0wo"
     
     GetSheetDone.labeledCols(spreadsheetId).then(sheet => {
-      console.log(sheet);
       this.setState({ listings : sheet.data });
     })
     .catch(err => {
