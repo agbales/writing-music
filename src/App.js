@@ -50,12 +50,21 @@ class App extends Component {
   }
 
   render() {
+    
+    let musicPlayerStyles = {
+      width: "250px"
+    }
+
+    if (this.state.nowPlaying.includes('spotify')) {
+      musicPlayerStyles.height = "550px";
+    }
+
     return (
       <div className="App">
         <Row>
           <Col s={2}>
             <iframe id="music-player"
-                    width="250px" 
+                    style={ musicPlayerStyles } 
                     title="now-playing"
                     src={this.state.nowPlaying}>
             </iframe>
