@@ -1,18 +1,73 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import GetSheetDone from 'get-sheet-done';
+import Cards from './components/cards.jsx';
+import {Row, Col} from 'react-materialize';
+
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { listings : [],
+                   nowPlaying: 'https://www.youtube.com/embed/GZh9D2nTB24' 
+                  };
+    this.getGoogleSheet = this.getGoogleSheet.bind(this);
+    this.updateNowPlaying = this.updateNowPlaying.bind(this);
+  }
+
+  componentDidMount() {
+    this.getGoogleSheet();
+    this.callApi()
+      .then(res => this.setState({ response: res.express }))
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch('/api/data');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  };
+
+  getGoogleSheet() {
+    const spreadsheetId = "1SKdOtCncMCtEr7yFrnRi9ggZxgIFOXwxTPQ47vjr0wo"
+    
+    GetSheetDone.labeledCols(spreadsheetId).then(sheet => {
+      console.log(sheet);
+      this.setState({ listings : sheet.data });
+    })
+    .catch(err => {
+        console.log('Error');
+        console.log(err);
+    })
+  }
+
+  updateNowPlaying(e){
+    let update = e.target.dataset.video;
+    this.setState({ nowPlaying : update });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Row>
+          <Col s={2}>
+            <iframe id="music-player"
+                    width="250px" 
+                    title="now-playing"
+                    src={this.state.nowPlaying}>
+            </iframe>
+          </Col>
+          <Col s={12} m={10}>
+            <header className="App-header">
+              <h1 className="App-title">Music for Writing</h1>
+            </header>
+            <Cards listings={this.state.listings} updateNowPlaying={this.updateNowPlaying} test={this.test}/>
+          </Col>  
+        </Row>
       </div>
     );
   }
