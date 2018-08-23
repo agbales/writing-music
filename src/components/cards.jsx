@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Row, Col, CardPanel, Chip, Button} from 'react-materialize';
+import {CardPanel, Chip, Button} from 'react-materialize';
 
 export default class Cards extends React.Component {
 
