@@ -12,6 +12,10 @@ export default class Cards extends React.Component {
     }
 
     onRecommendationsClick(artist){
+        // 1) authorize’ endpoint, passing to it the client ID, scopes, and redirect URI
+        // 2) /api/token’ endpoint, passing to it the authorization code returned by the first call and the client secret key.
+        // --> 
+        
         console.log(this.getSpotifyAuthorization)
 
         const getId = this.getBandId(artist);
