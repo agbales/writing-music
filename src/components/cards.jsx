@@ -123,6 +123,7 @@ export default class Cards extends React.Component {
     }
     
     render() {
+
         return(
             <ul className="flex-container">
                 { this.props.listings.map( (listing, index) => {
@@ -142,13 +143,13 @@ export default class Cards extends React.Component {
 
                                     { this.state.recommendationsId == index && this.state.recommendations.tracks !== undefined
                                         ? ( <div>
-                                                {this.state.recommendations.tracks.map(track, index => {
+                                                {/* {this.state.recommendations.tracks.map(track, index => {
                                                     <div key={index}>
                                                         <h5>{track.album.artists.name}</h5>
                                                         <p>{track.album.name}</p>
                                                         <a href={track.external_urls.spotify} target='_blank'/>
                                                     </div>
-                                                })}
+                                                })} */}
                                             </div>)
                                         : (<div />)
                                     }
