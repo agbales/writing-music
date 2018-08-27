@@ -1,6 +1,6 @@
-
 import React from 'react';
 import {CardPanel, Chip, Button} from 'react-materialize';
+import dotenv from 'dotenv';
 
 export default class Cards extends React.Component {
 
@@ -12,10 +12,6 @@ export default class Cards extends React.Component {
     }
 
     onRecommendationsClick(artist){
-        // 1) authorize’ endpoint, passing to it the client ID, scopes, and redirect URI
-        // 2) /api/token’ endpoint, passing to it the authorization code returned by the first call and the client secret key.
-        // --> 
-        
         console.log(this.getSpotifyAuthorization)
 
         const getId = this.getBandId(artist);
@@ -23,8 +19,17 @@ export default class Cards extends React.Component {
     }
 
     getSpotifyAuthorization(){
-        fetch("https://accounts.spotify.com/authorize&client_id=c2e56ee7705d4d919e509dc827dfb6a9")
-            .then(response => response.json())
+        const clientId = 'c2e56ee7705d4d919e509dc827dfb6a9';
+        // get token
+        fetch('https://accounts.spotify.com/api/token', {
+            method: "POST",
+            header: { "Authorization" : clientId },
+            body: { "grant_type" : "client_credentials" }
+        }).then(response => response.json())
+        .then(data => console.log('authentication', data))
+
+        // fetch("https://accounts.spotify.com/api/token&client_id=c2e56ee7705d4d919e509dc827dfb6a9")
+        //     .then(response => response.json())
     }
 
     getBandId(artist) {
