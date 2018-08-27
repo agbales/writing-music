@@ -11,9 +11,9 @@ export default class Cards extends React.Component {
             recommendations: {
                 tracks : [{ 
                     album : {
-                        artists: [{ name: '' }], 
-                        name: '',
-                        external_urls: { spotify : '' },
+                        artists: [{ name: 'Real Estate' }], 
+                        name: 'New Album',
+                        external_urls: { spotify : 'www.google.com' },
                     }
                 }]
             },
@@ -24,7 +24,7 @@ export default class Cards extends React.Component {
         this.getRecommendations = this.getRecommendations.bind(this);
     }
 
-    onRecommendationsClick(artist) {
+    onRecommendationsClick(artist, cardId) {
         const parsed = queryString.parse(window.location.search);
         const access_token = parsed.access_token;
 
@@ -57,7 +57,10 @@ export default class Cards extends React.Component {
             .then(response => response.json())
             .then(recommendations => {
                 console.log('Recommendations', recommendations)
-                this.setState({ recommendations : recommendations })
+                this.setState({ 
+                    recommendations : recommendations,
+                    recommendationsId : cardId
+                })
             })
             .catch(function(error) {
                 console.log('Request failed', error)
@@ -138,17 +141,17 @@ export default class Cards extends React.Component {
                                     <p><i>{listing.album}</i> ({listing.year})</p>
                                     <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
                                     <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
-                                    <Button onClick={() => {this.onRecommendationsClick(listing.artist)} }>Get Recommendations</Button>
+                                    <Button onClick={() => {this.onRecommendationsClick(listing.artist, index)} }>Get Recommendations</Button>
 
                                     { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined 
                                         ? (<div>
-                                                <h4>Recommendations</h4>
+                                                <p>Recommendations ({this.state.recommendations.tracks.length})</p>
                                                 {this.state.recommendations.tracks.map( (track, index) => {
-                                                    <div key={index}>
-                                                        <h5>{track.album.artists[0].name}</h5>
-                                                        <p>{track.album.name}</p>
-                                                        <a href={track.album.external_urls.spotify} target='_blank'/>
-                                                    </div>
+                                                    return(<div key={index}>
+                                                                <p>{track.album.artists[0].name} // <i>{track.album.name}</i> // 
+                                                                    <a href={track.album.external_urls.spotify} target='_blank'> Listen</a>
+                                                                </p>
+                                                            </div>)
                                                 })}
                                             </div>)
                                         : (<div />)
