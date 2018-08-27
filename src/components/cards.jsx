@@ -1,34 +1,34 @@
 import React from 'react';
 import {CardPanel, Chip, Button} from 'react-materialize';
-import dotenv from 'dotenv';
 
 export default class Cards extends React.Component {
 
     constructor(props) {
         super(props);
+        this.getBandId = this.getBandId.bind(this);
         this.getRecommendations = this.getRecommendations.bind(this);
         this.getSpotifyAuthorization = this.getSpotifyAuthorization.bind(this);
-        this.getBandId = this.getBandId.bind(this);
     }
 
     onRecommendationsClick(artist){
-        console.log(this.getSpotifyAuthorization)
+        this.getSpotifyAuthorization();
 
-        const getId = this.getBandId(artist);
-        getId.then(id=> this.getRecommendations(id))
+        // const getId = this.getBandId(artist);
+        // getId.then(id=> this.getRecommendations(id))
     }
 
     getSpotifyAuthorization(){
-        const clientId = process.env.CLIENT_ID;
-        const clientSecret = process.env.CLIENT_SECRET;
+        const clientId = process.env.REACT_APP_CLIENT_ID;
+        const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+
+        console.log(process.env);
         
-        // get token
-        fetch('https://accounts.spotify.com/api/token', {
-            method: "POST",
-            header: { "Authorization" : clientId },
-            body: { "grant_type" : "client_credentials" }
-        }).then(response => response.json())
-        .then(data => console.log('authentication', data))
+        // fetch('https://accounts.spotify.com/api/token', {
+        //     method: "POST",
+        //     header: { "Authorization" : clientId },
+        //     body: { "grant_type" : "client_credentials" }
+        // }).then(response => response.json())
+        // .then(data => console.log('authentication', data))
 
         // fetch("https://accounts.spotify.com/api/token&client_id=c2e56ee7705d4d919e509dc827dfb6a9")
         //     .then(response => response.json())
@@ -105,7 +105,7 @@ export default class Cards extends React.Component {
                                     <p><i>{listing.album}</i> ({listing.year})</p>
                                     <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
                                     <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
-                                    <Button onClick={() => this.getBandId(listing.artist)}>Find More</Button>
+                                    <Button onClick={() => this.onRecommendationsClick(listing.artist)}>Find More</Button>
                                 </CardPanel>
                             </li>
                         );
