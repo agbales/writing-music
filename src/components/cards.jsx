@@ -19,7 +19,9 @@ export default class Cards extends React.Component {
     }
 
     getSpotifyAuthorization(){
-        const clientId = 'c2e56ee7705d4d919e509dc827dfb6a9';
+        const clientId = process.env.CLIENT_ID;
+        const clientSecret = process.env.CLIENT_SECRET;
+        
         // get token
         fetch('https://accounts.spotify.com/api/token', {
             method: "POST",
