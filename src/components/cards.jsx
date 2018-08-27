@@ -11,9 +11,9 @@ export default class Cards extends React.Component {
             recommendations: {
                 tracks : [{ 
                     album : {
-                        artists: [{ name: 'Real Estate' }], 
-                        name: 'New Album',
-                        external_urls: { spotify : 'www.google.com' },
+                        artists: [{ name: '' }], 
+                        name: '',
+                        external_urls: { spotify : '' },
                         images: [{},{},{url: ''}]
                     }
                 }]
@@ -127,6 +127,8 @@ export default class Cards extends React.Component {
     }
     
     render() {
+        let recs = this.state.recommendations.tracks;
+
         return(
             <ul className="flex-container">
                 { this.props.listings.map( (listing, index) => {
@@ -144,13 +146,13 @@ export default class Cards extends React.Component {
                                     <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
                                     <Button onClick={() => {this.onRecommendationsClick(listing.artist, index)} }>Get Recommendations</Button>
 
-                                    { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined 
+                                    { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined && recs.length > 1
                                         ? (<div>
                                                 <Collection header='Recommendations'>
-                                                {this.state.recommendations.tracks.map( (track, index) => {
+                                                {recs.map( (track, index) => {
                                                     return(<div key={index}>
                                                                 <CollectionItem href={track.album.external_urls.spotify} target="_blank">
-                                                                    <img src={track.album.images[2].url} style={ {margin: "5px"} }/>
+                                                                    <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
                                                                     <p>{track.album.artists[0].name}</p>
                                                                     <p><i>{track.album.name}</i></p>
                                                                 </CollectionItem>
