@@ -10,10 +10,11 @@ export default class Cards extends React.Component {
         this.state = { 
             recommendations: {
                 tracks : [{ 
-                    album : '', 
-                    artists: '', 
-                    name: '',
-                    external_urls: { spotify : '' },
+                    album : {
+                        artists: [{ name: '' }], 
+                        name: '',
+                        external_urls: { spotify : '' },
+                    }
                 }]
             },
             recommendationsId : 0 
@@ -57,7 +58,6 @@ export default class Cards extends React.Component {
             .then(recommendations => {
                 console.log('Recommendations', recommendations)
                 this.setState({ recommendations : recommendations })
-                return recommendations;
             })
             .catch(function(error) {
                 console.log('Request failed', error)
@@ -123,7 +123,6 @@ export default class Cards extends React.Component {
     }
     
     render() {
-
         return(
             <ul className="flex-container">
                 { this.props.listings.map( (listing, index) => {
@@ -141,15 +140,16 @@ export default class Cards extends React.Component {
                                     <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
                                     <Button onClick={() => {this.onRecommendationsClick(listing.artist)} }>Get Recommendations</Button>
 
-                                    { this.state.recommendationsId == index && this.state.recommendations.tracks !== undefined
-                                        ? ( <div>
-                                                {/* {this.state.recommendations.tracks.map(track, index => {
+                                    { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined 
+                                        ? (<div>
+                                                <h4>Recommendations</h4>
+                                                {this.state.recommendations.tracks.map( (track, index) => {
                                                     <div key={index}>
-                                                        <h5>{track.album.artists.name}</h5>
+                                                        <h5>{track.album.artists[0].name}</h5>
                                                         <p>{track.album.name}</p>
-                                                        <a href={track.external_urls.spotify} target='_blank'/>
+                                                        <a href={track.album.external_urls.spotify} target='_blank'/>
                                                     </div>
-                                                })} */}
+                                                })}
                                             </div>)
                                         : (<div />)
                                     }
