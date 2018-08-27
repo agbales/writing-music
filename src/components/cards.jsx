@@ -6,56 +6,78 @@ export default class Cards extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.getBandId = this.getBandId.bind(this);
-        // this.getRecommendations = this.getRecommendations.bind(this);
-        // this.getSpotifyAuthorization = this.getSpotifyAuthorization.bind(this);
+        this.getBandId = this.getBandId.bind(this);
+        this.getRecommendations = this.getRecommendations.bind(this);
     }
 
     onRecommendationsClick(artist) {
         const parsed = queryString.parse(window.location.search);
         const access_token = parsed.access_token;
 
-        console.log(access_token);
-        // use access token provided by the server
-        // query spotify for recommendations:
-        // const getId = this.getBandId(artist);
-        // getId.then(id=> this.getRecommendations(id))
+        // use access token to get band ID, then get recs
+        const bandLookup = 'https://api.spotify.com/v1/search?';
+        const query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
+        console.log('looking up ', artist);
+        
+        fetch(bandLookup + query, {
+                headers: {
+                    "Authorization": 'Bearer ' + access_token,
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                let id = json.artists.items[0].id;
+                console.log('id', id);
+                return id;
+            })
+            .catch(function(error) {
+                console.log('Request failed', error)
+            })
+        .then(id => {
+            fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
+                headers: {
+                    "Authorization": "Bearer " + access_token
+                }
+            })
+            .then(response => response.json())
+            .then(recommendations => {
+                console.log('Recommendations', recommendations)
+                this.setState({ recommendations : recommendations })
+                return recommendations;
+            })
+            .catch(function(error) {
+                console.log('Request failed', error)
+            })
+        })
+        .catch(err => console.log(err))
     }
 
-    // getSpotifyAuthorization(){
-    //     let query = 'client_id=' + process.env.REACT_APP_CLIENT_ID +
-    //                 'redirect_uri' + 'https://writing-music.herokuapp.com/'
-
-    //     fetch('https://accounts.spotify.com/authorize?' + query, { mode: 'no-cors' })
-    //         .then(response => response.json())
-    //         .then(data => console.log(data))
-    //         .catch(err => console.log(err));
-    // }
-
-    // getBandId(artist) {
-    //     const bandLookup = 'https://api.spotify.com/v1/search?';
-    //     let query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
+    getBandId(artist, accessToken) {
+        const bandLookup = 'https://api.spotify.com/v1/search?';
+        let query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
     
-    //     console.log('looking up ', artist);
+        console.log('looking up ', artist);
         
-    //     fetch(bandLookup + query, {
-    //             headers: {
-    //                 "Accept": "application/json",
-    //                 "Content-Type": "application/json",
-    //             }
-    //         })
-    //         .then(response => response.json())
-    //         .then(json => {
-    //             console.log(json);
-    //             // let id = json.artists.items[0].id;
-    //             // return id;
-    //         })
-    //         .catch(function(error) {
-    //             console.log('Request failed', error)
-    //         })
-    // }
+        fetch(bandLookup + query, {
+                headers: {
+                    "Authorization": 'Bearer ' + accessToken,
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                let id = json.artists.items[0].id;
+                console.log('id', id);
+                return id;
+            })
+            .catch(function(error) {
+                console.log('Request failed', error)
+            })
+    }
 
-    // getRecommendations(id) {
+    getRecommendations(id) {
+        console.log('got ID', id);
     //     fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
     //         headers: {
     //             "Accept": "application/json",
@@ -71,7 +93,7 @@ export default class Cards extends React.Component {
     //     .catch(function(error) {
     //         console.log('Request failed', error)
     //     })
-    // }
+    }
     
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
