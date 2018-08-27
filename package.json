@@ -5,6 +5,7 @@
   "dependencies": {
     "dotenv": "^6.0.0",
     "get-sheet-done": "^0.1.4",
+    "query-string": "^6.1.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-materialize": "^2.4.5",

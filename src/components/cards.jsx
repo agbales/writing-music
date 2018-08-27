@@ -1,79 +1,77 @@
 import React from 'react';
 import {CardPanel, Chip, Button} from 'react-materialize';
+import queryString from 'query-string';
 
 export default class Cards extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getBandId = this.getBandId.bind(this);
-        this.getRecommendations = this.getRecommendations.bind(this);
-        this.getSpotifyAuthorization = this.getSpotifyAuthorization.bind(this);
+        // this.getBandId = this.getBandId.bind(this);
+        // this.getRecommendations = this.getRecommendations.bind(this);
+        // this.getSpotifyAuthorization = this.getSpotifyAuthorization.bind(this);
     }
 
-    onRecommendationsClick(artist){
-        this.getSpotifyAuthorization();
+    onRecommendationsClick(artist) {
+        const parsed = queryString.parse(window.location.search);
+        const access_token = parsed.access_token;
 
+        console.log(access_token);
+        // use access token provided by the server
+        // query spotify for recommendations:
         // const getId = this.getBandId(artist);
         // getId.then(id=> this.getRecommendations(id))
     }
 
-    getSpotifyAuthorization(){
-        const clientId = process.env.REACT_APP_CLIENT_ID;
-        const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+    // getSpotifyAuthorization(){
+    //     let query = 'client_id=' + process.env.REACT_APP_CLIENT_ID +
+    //                 'redirect_uri' + 'https://writing-music.herokuapp.com/'
 
-        console.log(process.env);
-        
-        // fetch('https://accounts.spotify.com/api/token', {
-        //     method: "POST",
-        //     header: { "Authorization" : clientId },
-        //     body: { "grant_type" : "client_credentials" }
-        // }).then(response => response.json())
-        // .then(data => console.log('authentication', data))
+    //     fetch('https://accounts.spotify.com/authorize?' + query, { mode: 'no-cors' })
+    //         .then(response => response.json())
+    //         .then(data => console.log(data))
+    //         .catch(err => console.log(err));
+    // }
 
-        // fetch("https://accounts.spotify.com/api/token&client_id=c2e56ee7705d4d919e509dc827dfb6a9")
-        //     .then(response => response.json())
-    }
-
-    getBandId(artist) {
-        const bandLookup = 'https://api.spotify.com/v1/search?';
-        let query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
+    // getBandId(artist) {
+    //     const bandLookup = 'https://api.spotify.com/v1/search?';
+    //     let query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
     
-        console.log('looking up ', artist);
+    //     console.log('looking up ', artist);
         
-        fetch(bandLookup + query, {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                }
-            })
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                // let id = json.artists.items[0].id;
-                // return id;
-            })
-            .catch(function(error) {
-                console.log('Request failed', error)
-            })
-    }
+    //     fetch(bandLookup + query, {
+    //             headers: {
+    //                 "Accept": "application/json",
+    //                 "Content-Type": "application/json",
+    //             }
+    //         })
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             console.log(json);
+    //             // let id = json.artists.items[0].id;
+    //             // return id;
+    //         })
+    //         .catch(function(error) {
+    //             console.log('Request failed', error)
+    //         })
+    // }
 
-    getRecommendations(id) {
-        fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": "Bearer BQCHowy1iH9mJ-A_w3xlu0AjPV6YRyV_p_2pqqsudnUg2aW2SJ7LumQBFsbOnDyAWnN2_5XntLDdPZEXMhwGv8RS4zAwbw2y0V-KIb1ZLCh0YjvCiNDei7ImR_rx7SqgAuTPuN4"
-            }
-        })
-        .then(response => response.json())
-        .then(recommendations => {
-            console.log('Recommendations', recommendations)
-            return recommendations;
-        })
-        .catch(function(error) {
-            console.log('Request failed', error)
-        })
-    }
+    // getRecommendations(id) {
+    //     fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer BQCHowy1iH9mJ-A_w3xlu0AjPV6YRyV_p_2pqqsudnUg2aW2SJ7LumQBFsbOnDyAWnN2_5XntLDdPZEXMhwGv8RS4zAwbw2y0V-KIb1ZLCh0YjvCiNDei7ImR_rx7SqgAuTPuN4"
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(recommendations => {
+    //         console.log('Recommendations', recommendations)
+    //         return recommendations;
+    //     })
+    //     .catch(function(error) {
+    //         console.log('Request failed', error)
+    //     })
+    // }
     
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
