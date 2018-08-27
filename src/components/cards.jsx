@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardPanel, Chip, Button} from 'react-materialize';
+import {CardPanel, Chip, Button, Modal} from 'react-materialize';
 import queryString from 'query-string';
 
 export default class Cards extends React.Component {
@@ -125,7 +125,13 @@ export default class Cards extends React.Component {
                                     <p><i>{listing.album}</i> ({listing.year})</p>
                                     <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
                                     <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
-                                    <Button onClick={() => this.onRecommendationsClick(listing.artist)}>Find More</Button>
+                                    <Modal
+                                        header='Modal Header'
+                                        trigger={<Button onClick={() => this.onRecommendationsClick(listing.artist)}>Recommendations</Button>}>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.</p>
+                                    </Modal>
+                                    {/* <Button onClick={() => this.onRecommendationsClick(listing.artist)}>Find More</Button> */}
                                 </CardPanel>
                             </li>
                         );
