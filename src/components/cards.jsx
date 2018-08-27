@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardPanel, Chip, Button, Modal} from 'react-materialize';
+import {CardPanel, Chip, Button, Collection, CollectionItem} from 'react-materialize';
 import queryString from 'query-string';
 
 export default class Cards extends React.Component {
@@ -14,6 +14,7 @@ export default class Cards extends React.Component {
                         artists: [{ name: 'Real Estate' }], 
                         name: 'New Album',
                         external_urls: { spotify : 'www.google.com' },
+                        images: [{},{},{url: ''}]
                     }
                 }]
             },
@@ -145,14 +146,17 @@ export default class Cards extends React.Component {
 
                                     { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined 
                                         ? (<div>
-                                                <p>Recommendations ({this.state.recommendations.tracks.length})</p>
+                                                <Collection header='Recommendations'>
                                                 {this.state.recommendations.tracks.map( (track, index) => {
                                                     return(<div key={index}>
-                                                                <p>{track.album.artists[0].name} // <i>{track.album.name}</i> // 
-                                                                    <a href={track.album.external_urls.spotify} target='_blank'> Listen</a>
-                                                                </p>
+                                                                <CollectionItem href={track.album.external_urls.spotify} target="_blank">
+                                                                    <img src={track.album.images[2].url} style={ {margin: "5px"} }/>
+                                                                    <p>{track.album.artists[0].name}</p>
+                                                                    <p><i>{track.album.name}</i></p>
+                                                                </CollectionItem>
                                                             </div>)
                                                 })}
+                                                </Collection>
                                             </div>)
                                         : (<div />)
                                     }
