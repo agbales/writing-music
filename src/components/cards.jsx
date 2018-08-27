@@ -6,6 +6,19 @@ export default class Cards extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = { 
+            recommendations: {
+                tracks : [{ 
+                    album : '', 
+                    artists: '', 
+                    name: '',
+                    external_urls: { spotify : '' },
+                }]
+            },
+            recommendationsId : 0 
+        }
+
         this.getBandId = this.getBandId.bind(this);
         this.getRecommendations = this.getRecommendations.bind(this);
     }
@@ -125,13 +138,20 @@ export default class Cards extends React.Component {
                                     <p><i>{listing.album}</i> ({listing.year})</p>
                                     <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
                                     <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
-                                    <Modal
-                                        header='Modal Header'
-                                        trigger={<Button onClick={() => this.onRecommendationsClick(listing.artist)}>Recommendations</Button>}>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua.</p>
-                                    </Modal>
-                                    {/* <Button onClick={() => this.onRecommendationsClick(listing.artist)}>Find More</Button> */}
+                                    <Button onClick={() => {this.onRecommendationsClick(listing.artist)} }>Get Recommendations</Button>
+
+                                    { this.state.recommendationsId == index && this.state.recommendations.tracks !== undefined
+                                        ? ( <div>
+                                                {this.state.recommendations.tracks.map(track, index => {
+                                                    <div key={index}>
+                                                        <h5>{track.album.artists.name}</h5>
+                                                        <p>{track.album.name}</p>
+                                                        <a href={track.external_urls.spotify} target='_blank'/>
+                                                    </div>
+                                                })}
+                                            </div>)
+                                        : (<div />)
+                                    }
                                 </CardPanel>
                             </li>
                         );
