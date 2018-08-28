@@ -1,6 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {CardPanel, Chip, Button, Collection, CollectionItem} from 'react-materialize';
 import queryString from 'query-string';
+import Modal from './modal';
 
 export default class Cards extends React.Component {
 
@@ -18,14 +20,27 @@ export default class Cards extends React.Component {
                     }
                 }]
             },
-            recommendationsId : 0 
+            recommendationsId : 0
         }
 
         this.getBandId = this.getBandId.bind(this);
         this.getRecommendations = this.getRecommendations.bind(this);
+
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
+    
+    closeModal() {
+        this.setState({modalIsOpen: false});
     }
 
     onRecommendationsClick(artist, cardId) {
+        this.openModal()
+
         const parsed = queryString.parse(window.location.search);
         const access_token = parsed.access_token;
 
@@ -128,43 +143,54 @@ export default class Cards extends React.Component {
     
     render() {
         let recs = this.state.recommendations.tracks;
+        console.log('recs', recs);
 
         return(
             <ul className="flex-container">
                 { this.props.listings.map( (listing, index) => {
-                        return(
-                            <li key={index} className="flex-item">
-                                <CardPanel>
-                                    <img 
-                                        src={listing.albumcover} 
-                                        className="shadow"
-                                        style={ {maxHeight: "200px", width: "100%", objectFit: "contain"} } 
-                                    />
-                                    <h5>{listing.artist}</h5>
-                                    <p><i>{listing.album}</i> ({listing.year})</p>
-                                    <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
-                                    <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
-                                    <Button onClick={() => {this.onRecommendationsClick(listing.artist, index)} }>Get Recommendations</Button>
+                    return(
+                        <li key={index} className="flex-item">
+                            <CardPanel>
+                                <img 
+                                    src={listing.albumcover} 
+                                    className="shadow"
+                                    style={ {maxHeight: "200px", width: "100%", objectFit: "contain"} } 
+                                />
+                                <h5>{listing.artist}</h5>
+                                <p><i>{listing.album}</i> ({listing.year})</p>
+                                <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
+                                <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
+                                <Button onClick={() => {this.onRecommendationsClick(listing.artist, index)} }>Get Recommendations</Button>
 
-                                    { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined && recs.length > 1
-                                        ? (<div>
-                                                <Collection header='Recommendations'>
-                                                {recs.map( (track, index) => {
-                                                    return(<div key={index}>
-                                                                <CollectionItem href={track.album.external_urls.spotify} target="_blank">
-                                                                    <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
-                                                                    <p>{track.album.artists[0].name}</p>
-                                                                    <p><i>{track.album.name}</i></p>
-                                                                </CollectionItem>
-                                                            </div>)
-                                                })}
-                                                </Collection>
-                                            </div>)
-                                        : (<div />)
-                                    }
-                                </CardPanel>
-                            </li>
-                        );
+                                {/* { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined && recs.length > 1
+                                    ? (<div>
+                                            <Collection header='Recommendations'>
+                                            {recs.map( (track, index) => {
+                                                return(<div key={index}>
+                                                            <CollectionItem href={track.album.external_urls.spotify} target="_blank">
+                                                                <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
+                                                                <p>{track.album.artists[0].name}</p>
+                                                                <p><i>{track.album.name}</i></p>
+                                                            </CollectionItem>
+                                                        </div>)
+                                            })}
+                                            </Collection>
+                                        </div>)
+                                    : (<div />)
+                                } */}
+
+                                
+                                { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined
+                                    ? (<Modal
+                                            isOpen={this.state.modalIsOpen}
+                                            closeModal={this.closeModal}
+                                            contentLabel="Recommendations"
+                                            recommendations={this.state.recommendations.tracks}
+                                        />)
+                                    : (<div />)
+                                }
+                            </CardPanel>
+                        </li>);
                     })
                 }
             </ul>
