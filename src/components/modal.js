@@ -5,6 +5,11 @@ export default class Cards extends React.Component {
 
     constructor(props) {
         super(props);
+        this.displayRecommendations = this.displayRecommendations.bind(this);
+    }
+
+    displayRecommendations() {
+
     }
 
     render() {
@@ -39,15 +44,21 @@ export default class Cards extends React.Component {
                             <Col m={7} s={12} style={colStyle}> 
                                 <Button onClick={this.props.closeModal}>close</Button>
                                 <Collection header='Recommendations'>
-                                    {recs.map( (track, index) => {
-                                        return(<div key={index} style={recStyle}>
-                                                    <CollectionItem href={track.album.external_urls.spotify} target="_blank">
-                                                        <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
-                                                        <p>{track.album.artists[0].name}</p>
-                                                        <p><i>{track.album.name}</i></p>
-                                                    </CollectionItem>
-                                                </div>)
-                                    })}
+                                    {typeof recs != undefined && recs.length > 1
+                                        ? (<div>
+                                                {recs.map( (track, index) => {
+                                                    return(<div key={index} style={recStyle}>
+                                                                <CollectionItem href={track.album.external_urls.spotify} target="_blank">
+                                                                    <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
+                                                                    <p>{track.album.artists[0].name}</p>
+                                                                    <p><i>{track.album.name}</i></p>
+                                                                </CollectionItem>
+                                                            </div>)
+                                                })}
+                                            </div>)
+                                        : (<div>Loading...</div>)
+                                    }
+
                                 </Collection>
                             </Col>
                         </div>)
