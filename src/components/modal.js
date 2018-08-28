@@ -1,15 +1,10 @@
 import React from 'react';
-import {Row, Col, Card, CardTitle, CardPanel, Chip, Button, Collection, CollectionItem} from 'react-materialize';
+import {Col, Button, Collection, CollectionItem} from 'react-materialize';
 
 export default class Cards extends React.Component {
 
     constructor(props) {
         super(props);
-        this.displayRecommendations = this.displayRecommendations.bind(this);
-    }
-
-    displayRecommendations() {
-
     }
 
     render() {
