@@ -28,6 +28,10 @@ body {
   font-size: large;
 }
 
+.btn {
+  margin: 5px;
+}
+
 .shadow {
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12))
           drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))

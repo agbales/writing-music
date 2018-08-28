@@ -15,6 +15,7 @@ export default class Cards extends React.Component {
             padding: "20px", 
             left: "0",
             top: "0",
+            margin: "0 auto",
             width: "100%",
             height: "100%",
             overflow: "auto", 
@@ -27,16 +28,18 @@ export default class Cards extends React.Component {
             margin: "0 auto"
         }
 
-        const colStyle = {
+        let colStyle = {
             backgroundColor: "#fff",
-            width: "100%"
+            width: "50vw",
+            height: "90vh",
+            overflow: "auto"
         }
-
+        
         return(
             <div>
                 { this.props.isOpen
                     ? (<div style={modalStyles}>
-                            <Col m={7} s={12} style={colStyle}> 
+                            <Col m={6} s={12} offset="m3 s2" style={colStyle}> 
                                 <Button onClick={this.props.closeModal}>close</Button>
                                 <Collection header='Recommendations'>
                                     {typeof recs != undefined && recs.length > 1
