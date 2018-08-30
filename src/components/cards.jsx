@@ -29,7 +29,7 @@ export default class Cards extends React.Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
-
+    
     openModal() {
         this.setState({modalIsOpen: true});
     }
