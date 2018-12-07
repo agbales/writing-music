@@ -83,7 +83,7 @@ class App extends Component {
     return (
       <div className="App">
         <Row>
-          <Col s={2}>
+          <Col s={1}>
             { this.state.nowPlaying.includes('spotify')
                 ? (<div class="redirect-msg">
                       <p>Opening music in new tab.</p>
