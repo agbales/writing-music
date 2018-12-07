@@ -5,7 +5,9 @@ const helmet = require('helmet');
 const compression = require('compression');
 const request = require('request');
 
-require('dotenv').config();
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+}
 
 app.use(helmet());
 app.use(compression());
