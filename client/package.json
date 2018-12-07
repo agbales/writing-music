@@ -1,7 +1,6 @@
 {
   "name": "writing-music",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "get-sheet-done": "^0.1.4",
     "query-string": "^6.1.0",
