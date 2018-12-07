@@ -39,7 +39,7 @@ export default class Modal extends React.Component {
         let colStyle = {
             display: "inline-block",
             backgroundColor: "#fff",
-            width: "50vw",
+            width: "80vw",
             height: "90vh",
             overflow: "auto"
         }
@@ -49,7 +49,7 @@ export default class Modal extends React.Component {
                 { this.props.isOpen
                     ? (<div>
                         <Row style={modalStyles}>
-                            <Col s={12} m={10} style={colStyle}> 
+                            <div style={colStyle}>
                                 <a className="waves-effect waves-light btn modal-trigger" onClick={this.props.closeModal} style={closeBar}>close</a>
                                 <ul className="flex-container">
                                     { this.props.recommendations.map( (rec, index) => {
@@ -69,36 +69,10 @@ export default class Modal extends React.Component {
                                             </li>);
                                         })
                                     }
-                                </ul>     
-                            </Col>
+                                </ul> 
+                            </div>     
                         </Row>
                     </div>)
-
-                    // OLD LIST STYLE...
-                    // ? (<div style={modalStyles}>
-                    //         <div class="m6 s12" offset="m3 s2" style={colStyle}> 
-                    //             <a class="waves-effect waves-light btn modal-trigger" onClick={this.props.closeModal}>close</a>
-                    //             <ul class="collection" header="Recommendations">
-                    //                 {typeof recs != undefined && recs.length > 1
-                    //                     ? (<div>
-                    //                             {recs.map( (track, index) => {
-                    //                                 return(<div key={index} style={recStyle}>
-                    //                                             <li className="collection-item">
-                    //                                                 <a href={track.album.external_urls.spotify} target="_blank">
-                    //                                                     <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
-                    //                                                 </a>
-                    //                                                 <p>{track.album.artists[0].name}</p>
-                    //                                                 <p><i>{track.album.name}</i></p>
-                    //                                             </li>
-                    //                                         </div>)
-                    //                             })}
-                    //                         </div>)
-                    //                     : (<div>Loading...</div>)
-                    //                 }
-
-                    //             </ul>
-                    //         </div>
-                    //     </div>)
                     : (<div />)
                 }
             </div>)
