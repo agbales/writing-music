@@ -12,6 +12,9 @@
     "react-modal": "^3.5.1",
     "react-scripts": "1.1.5"
   },
+  "devDependencies": {
+    "react-scripts": "^1.1.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
