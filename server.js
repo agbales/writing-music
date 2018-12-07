@@ -34,6 +34,8 @@ app.get('/spotifyToken', function (req, res) {
     json: true
   };
 
+  console.log('SPOTIFY_CLIENT_ID', process.env.SPOTIFY_CLIENT_ID);
+  console.log('SPOTIFY_CLIENT_SECRET', process.env.SPOTIFY_CLIENT_SECRET);
   console.log('Spotify authOptions (server)', authOptions);
 
   request.post(authOptions, function(error, response, body) {
