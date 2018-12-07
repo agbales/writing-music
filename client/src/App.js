@@ -20,7 +20,6 @@ class App extends Component {
     this.getGoogleSheet();
     this.getSpotifyToken()
       .then(response => {
-        console.log('spotify token: ', response.token)
         this.setState({token: response.token})
       })
       .catch(err => console.log('Spotify Token unavailable', err));

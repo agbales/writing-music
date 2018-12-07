@@ -55,12 +55,8 @@ export default class Cards extends React.Component {
         this.openModal()
 
         const access_token = this.props.token;
-        console.log('access_token', access_token);
-        // use access token to get band ID, then get recs
-        // console.log('token? ', access_token)
         const bandLookup = 'https://api.spotify.com/v1/search?';
         const query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
-        console.log('looking up ', artist);
         
         fetch(bandLookup + query, {
                 headers: {
@@ -69,7 +65,6 @@ export default class Cards extends React.Component {
             })
             .then(response => response.json())
             .then(json => {
-                console.log('json', json);
                 let id = json.artists.items[0].id;
                 return id;
             })
@@ -100,9 +95,7 @@ export default class Cards extends React.Component {
     getBandId(artist, accessToken) {
         const bandLookup = 'https://api.spotify.com/v1/search?';
         let query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
-    
-        // console.log('looking up ', artist);
-        
+            
         fetch(bandLookup + query, {
                 headers: {
                     "Authorization": 'Bearer ' + accessToken,

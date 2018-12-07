@@ -5,9 +5,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const request = require('request');
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 app.use(helmet());
 app.use(compression());
@@ -34,9 +32,9 @@ app.get('/spotifyToken', function (req, res) {
     json: true
   };
 
-  console.log('SPOTIFY_CLIENT_ID', process.env.SPOTIFY_CLIENT_ID);
-  console.log('SPOTIFY_CLIENT_SECRET', process.env.SPOTIFY_CLIENT_SECRET);
-  console.log('Spotify authOptions (server)', authOptions);
+  // console.log('SPOTIFY_CLIENT_ID', process.env.SPOTIFY_CLIENT_ID);
+  // console.log('SPOTIFY_CLIENT_SECRET', process.env.SPOTIFY_CLIENT_SECRET);
+  // console.log('Spotify authOptions (server)', authOptions);
 
   request.post(authOptions, function(error, response, body) {
     console.log('response body', body);
