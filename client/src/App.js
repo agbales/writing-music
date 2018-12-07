@@ -9,6 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { listings : [],
+                   token: '',
                    nowPlaying: 'https://www.youtube.com/embed/GZh9D2nTB24' 
                   };
     this.getGoogleSheet = this.getGoogleSheet.bind(this);
@@ -17,13 +18,16 @@ class App extends Component {
 
   componentDidMount() {
     this.getGoogleSheet();
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
+    this.getSpotifyToken()
+      .then(response => {
+        console.log('spotify token: ', response.token)
+        this.setState({token: response.token})
+      })
+      .catch(err => console.log('Spotify Token unavailable', err));
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/data');
+  getSpotifyToken = async () => {
+    const response = await fetch('/spotifyToken');
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -43,6 +47,21 @@ class App extends Component {
     })
   }
 
+  shuffleListings() {
+    const array = this.state.listings;
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    this.setState({listings: array});
+  }
+
   updateNowPlaying(e){
     let update = e.target.dataset.video;
     this.setState({ nowPlaying : update });
@@ -53,6 +72,12 @@ class App extends Component {
     if (this.state.nowPlaying.includes('spotify')) {
       let win = window.open(this.state.nowPlaying, '_blank');
       win.focus();
+    }
+
+    let buttonStyle = {
+      backgroundColor: "#feb47b",
+      color: "#fff",
+      boxShadow: "0 0 0 0"
     }
 
     return (
@@ -74,7 +99,9 @@ class App extends Component {
             <header className="App-header">
               <h1 className="App-title">Writing Music</h1>
             </header>
-            <Cards listings={this.state.listings} updateNowPlaying={this.updateNowPlaying} test={this.test}/>
+            <Cards listings={this.state.listings} 
+                   updateNowPlaying={this.updateNowPlaying} 
+                   token={this.state.token} />
           </Col>  
         </Row>
       </div>
