@@ -37,6 +37,7 @@ export default class Modal extends React.Component {
         }
 
         let colStyle = {
+            display: "inline-block",
             backgroundColor: "#fff",
             width: "50vw",
             height: "90vh",
@@ -103,5 +104,3 @@ export default class Modal extends React.Component {
             </div>)
     }
 }
-
-

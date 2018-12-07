@@ -146,25 +146,7 @@ export default class Cards extends React.Component {
                                 <Button className="waves-effect waves-light btn" 
                                         onClick={() => {this.onRecommendationsClick(listing.artist, index)} } 
                                         style={buttonStyle}>Similar</Button>
-
-                                {/* { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined && recs.length > 1
-                                    ? (<div>
-                                            <Collection header='Recommendations'>
-                                            {recs.map( (track, index) => {
-                                                return(<div key={index}>
-                                                            <CollectionItem href={track.album.external_urls.spotify} target="_blank">
-                                                                <img src={track.album.images[2].url} style={ {margin: "5px", float: "left"} }/>
-                                                                <p>{track.album.artists[0].name}</p>
-                                                                <p><i>{track.album.name}</i></p>
-                                                            </CollectionItem>
-                                                        </div>)
-                                            })}
-                                            </Collection>
-                                        </div>)
-                                    : (<div />)
-                                } */}
-
-                                
+     
                                 { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined
                                     ? (<Modal
                                             isOpen={this.state.modalIsOpen}
