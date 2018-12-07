@@ -34,7 +34,10 @@ app.get('/spotifyToken', function (req, res) {
     json: true
   };
 
+  console.log('Spotify authOptions (server)', authOptions);
+
   request.post(authOptions, function(error, response, body) {
+    console.log('response body', body);
     if (!error && response.statusCode === 200) {
       res.json({ token: body.access_token });
     }
