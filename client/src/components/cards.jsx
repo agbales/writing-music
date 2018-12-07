@@ -68,7 +68,12 @@ export default class Cards extends React.Component {
             })
             .then(response => response.json())
             .then(json => {
-                let id = json.artists.items[0].id;
+                console.log('json', json);
+                let id = '';
+                if (json.artists.items[0]) {
+                    id = json.artists.items[0].id;
+
+                }
                 return id;
             })
             .catch(function(error) {
