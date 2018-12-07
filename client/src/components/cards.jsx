@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {CardPanel, Chip, Button, Collection, CollectionItem} from 'react-materialize';
-import queryString from 'query-string';
+import {CardPanel, Button } from 'react-materialize';
 import Modal from './modal';
 
 export default class Cards extends React.Component {
@@ -20,31 +19,44 @@ export default class Cards extends React.Component {
                     }
                 }]
             },
+            modalIsOpen: false,
             recommendationsId : 0
         }
 
+        this.clearRecommndations = this.clearRecommndations.bind(this);
         this.getBandId = this.getBandId.bind(this);
-        this.getRecommendations = this.getRecommendations.bind(this);
-
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
-    
-    openModal() {
-        this.setState({modalIsOpen: true});
+
+    clearRecommndations() {
+        const empty = { tracks : [{ 
+                            album : {
+                                artists: [{ name: '' }], 
+                                name: '',
+                                external_urls: { spotify : '' },
+                                images: [{},{},{url: ''}]
+                            }
+                        }] 
+                    };
+        this.setState({ recommendations : empty});
     }
-    
+
     closeModal() {
         this.setState({modalIsOpen: false});
     }
 
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
+
     onRecommendationsClick(artist, cardId) {
+        this.clearRecommndations();
         this.openModal()
 
-        const parsed = queryString.parse(window.location.search);
-        const access_token = parsed.access_token;
-
+        const access_token = this.props.token;
         // use access token to get band ID, then get recs
+        // console.log('token? ', access_token)
         const bandLookup = 'https://api.spotify.com/v1/search?';
         const query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
         console.log('looking up ', artist);
@@ -56,9 +68,7 @@ export default class Cards extends React.Component {
             })
             .then(response => response.json())
             .then(json => {
-                console.log(json);
                 let id = json.artists.items[0].id;
-                console.log('id', id);
                 return id;
             })
             .catch(function(error) {
@@ -72,7 +82,7 @@ export default class Cards extends React.Component {
             })
             .then(response => response.json())
             .then(recommendations => {
-                console.log('Recommendations', recommendations)
+                // console.log('Recommendations', recommendations)
                 this.setState({ 
                     recommendations : recommendations,
                     recommendationsId : cardId
@@ -89,7 +99,7 @@ export default class Cards extends React.Component {
         const bandLookup = 'https://api.spotify.com/v1/search?';
         let query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
     
-        console.log('looking up ', artist);
+        // console.log('looking up ', artist);
         
         fetch(bandLookup + query, {
                 headers: {
@@ -98,52 +108,22 @@ export default class Cards extends React.Component {
             })
             .then(response => response.json())
             .then(json => {
-                console.log(json);
                 let id = json.artists.items[0].id;
-                console.log('id', id);
                 return id;
             })
             .catch(function(error) {
                 console.log('Request failed', error)
             })
     }
-
-    getRecommendations(id) {
-        console.log('got ID', id);
-    //     fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
-    //         headers: {
-    //             "Accept": "application/json",
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer BQCHowy1iH9mJ-A_w3xlu0AjPV6YRyV_p_2pqqsudnUg2aW2SJ7LumQBFsbOnDyAWnN2_5XntLDdPZEXMhwGv8RS4zAwbw2y0V-KIb1ZLCh0YjvCiNDei7ImR_rx7SqgAuTPuN4"
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(recommendations => {
-    //         console.log('Recommendations', recommendations)
-    //         return recommendations;
-    //     })
-    //     .catch(function(error) {
-    //         console.log('Request failed', error)
-    //     })
-    }
-    
-    shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-      
-        while (0 !== currentIndex) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-    
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-        return array;
-    }
     
     render() {
         let recs = this.state.recommendations.tracks;
-        console.log('recs', recs);
+        
+        let buttonStyle = {
+            backgroundColor: "#fff",
+            color: "#181818",
+            boxShadow: "0 5 0 0"
+        }
 
         return(
             <ul className="flex-container">
@@ -158,9 +138,14 @@ export default class Cards extends React.Component {
                                 />
                                 <h5>{listing.artist}</h5>
                                 <p><i>{listing.album}</i> ({listing.year})</p>
-                                <p><Chip><b>From:</b>  {listing.addedby}</Chip><Chip><b>Lyrics?</b> {listing.lyrics}</Chip></p>
-                                <Button data-video={listing.audio} onClick={this.props.updateNowPlaying}>Listen</Button>
-                                <Button onClick={() => {this.onRecommendationsClick(listing.artist, index)} }>Get Recommendations</Button>
+                                <p><div className="chip"><b>From:</b>  {listing.addedby}</div><div className="chip"><b>Lyrics?</b> {listing.lyrics}</div></p>
+                                <Button className="waves-effect waves-light btn" 
+                                        data-video={listing.audio} 
+                                        onClick={this.props.updateNowPlaying} 
+                                        style={buttonStyle}>Listen</Button>
+                                <Button className="waves-effect waves-light btn" 
+                                        onClick={() => {this.onRecommendationsClick(listing.artist, index)} } 
+                                        style={buttonStyle}>Similar</Button>
 
                                 {/* { this.state.recommendationsId == index && typeof this.state.recommendations.tracks != undefined && recs.length > 1
                                     ? (<div>
