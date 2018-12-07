@@ -46,7 +46,7 @@ export default class Modal extends React.Component {
 
         return(
             <div>
-                { this.props.isOpen
+                { this.props.isOpen 
                     ? (<div>
                         <Row style={modalStyles}>
                             <div style={colStyle}>
