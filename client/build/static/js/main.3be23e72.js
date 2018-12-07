@@ -2759,8 +2759,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_css__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__ = __webpack_require__(88);
-__webpack_require__(89).config();__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__App__["a" /* default */],null),document.getElementById('root'));Object(__WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__["a" /* default */])();
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__ = __webpack_require__(85);
+__webpack_require__(86).config();__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__App__["a" /* default */],null),document.getElementById('root'));Object(__WEBPACK_IMPORTED_MODULE_4__registerServiceWorker__["a" /* default */])();
 
 /***/ }),
 /* 27 */
@@ -3309,9 +3309,9 @@ module.exports = isNode;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_cards_jsx__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_materialize__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_materialize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_materialize__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__App_css__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__App_css__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__App_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__App_css__);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(props){var _this2=this;_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this,props));_this.callApi=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){var response,body;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.next=2;return fetch('/api/data');case 2:response=_context.sent;_context.next=5;return response.json();case 5:body=_context.sent;if(!(response.status!==200)){_context.next=8;break;}throw Error(body.message);case 8:return _context.abrupt('return',body);case 9:case'end':return _context.stop();}}},_callee,_this2);}));_this.state={listings:[],nowPlaying:'https://www.youtube.com/embed/GZh9D2nTB24'};_this.getGoogleSheet=_this.getGoogleSheet.bind(_this);_this.updateNowPlaying=_this.updateNowPlaying.bind(_this);return _this;}_createClass(App,[{key:'componentDidMount',value:function componentDidMount(){var _this3=this;this.getGoogleSheet();this.callApi().then(function(res){return _this3.setState({response:res.express});}).catch(function(err){return console.log(err);});}},{key:'getGoogleSheet',value:function getGoogleSheet(){var _this4=this;var spreadsheetId="1SKdOtCncMCtEr7yFrnRi9ggZxgIFOXwxTPQ47vjr0wo";__WEBPACK_IMPORTED_MODULE_2_get_sheet_done___default.a.labeledCols(spreadsheetId).then(function(sheet){_this4.setState({listings:sheet.data});}).catch(function(err){console.log('Error');console.log(err);});}},{key:'updateNowPlaying',value:function updateNowPlaying(e){var update=e.target.dataset.video;this.setState({nowPlaying:update});}},{key:'render',value:function render(){if(this.state.nowPlaying.includes('spotify')){var win=window.open(this.state.nowPlaying,'_blank');win.focus();}return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('div',{className:'App'},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_materialize__["Row"],null,__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_materialize__["Col"],{s:2},this.state.nowPlaying.includes('spotify')?__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('div',{'class':'redirect-msg'},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('p',null,'Opening music in new tab.')):__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('iframe',{id:'music-player',title:'now-playing',allowtransparency:'true',src:this.state.nowPlaying})),__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_materialize__["Col"],{s:12,m:10},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('header',{className:'App-header'},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('h1',{className:'App-title'},'Writing Music')),__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_cards_jsx__["a" /* default */],{listings:this.state.listings,updateNowPlaying:this.updateNowPlaying,test:this.test}))));}}]);return App;}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);/* harmony default export */ __webpack_exports__["a"] = (App);
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(props){var _this2=this;_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this,props));_this.getSpotifyToken=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){var response,body;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.next=2;return fetch('/spotifyToken');case 2:response=_context.sent;_context.next=5;return response.json();case 5:body=_context.sent;if(!(response.status!==200)){_context.next=8;break;}throw Error(body.message);case 8:return _context.abrupt('return',body);case 9:case'end':return _context.stop();}}},_callee,_this2);}));_this.state={listings:[],token:'',nowPlaying:'https://www.youtube.com/embed/GZh9D2nTB24'};_this.getGoogleSheet=_this.getGoogleSheet.bind(_this);_this.updateNowPlaying=_this.updateNowPlaying.bind(_this);return _this;}_createClass(App,[{key:'componentDidMount',value:function componentDidMount(){var _this3=this;this.getGoogleSheet();this.getSpotifyToken().then(function(response){console.log('spotify token: ',response.token);_this3.setState({token:response.token});}).catch(function(err){return console.log('Spotify Token unavailable',err);});}},{key:'getGoogleSheet',value:function getGoogleSheet(){var _this4=this;var spreadsheetId="1SKdOtCncMCtEr7yFrnRi9ggZxgIFOXwxTPQ47vjr0wo";__WEBPACK_IMPORTED_MODULE_2_get_sheet_done___default.a.labeledCols(spreadsheetId).then(function(sheet){_this4.setState({listings:sheet.data});}).catch(function(err){console.log('Error');console.log(err);});}},{key:'shuffleListings',value:function shuffleListings(){var array=this.state.listings;var currentIndex=array.length,temporaryValue,randomIndex;while(0!==currentIndex){randomIndex=Math.floor(Math.random()*currentIndex);currentIndex-=1;temporaryValue=array[currentIndex];array[currentIndex]=array[randomIndex];array[randomIndex]=temporaryValue;}this.setState({listings:array});}},{key:'updateNowPlaying',value:function updateNowPlaying(e){var update=e.target.dataset.video;this.setState({nowPlaying:update});}},{key:'render',value:function render(){if(this.state.nowPlaying.includes('spotify')){var win=window.open(this.state.nowPlaying,'_blank');win.focus();}var buttonStyle={backgroundColor:"#feb47b",color:"#fff",boxShadow:"0 0 0 0"};return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('div',{className:'App'},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_materialize__["Row"],null,__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_materialize__["Col"],{s:1},this.state.nowPlaying.includes('spotify')?__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('div',{'class':'redirect-msg'},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('p',null,'Opening music in new tab.')):__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('iframe',{id:'music-player',title:'now-playing',allowtransparency:'true',src:this.state.nowPlaying})),__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_materialize__["Col"],{s:12,m:10},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('header',{className:'App-header'},__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('h1',{className:'App-title'},'Writing Music')),__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_cards_jsx__["a" /* default */],{listings:this.state.listings,updateNowPlaying:this.updateNowPlaying,token:this.state.token}))));}}]);return App;}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);/* harmony default export */ __webpack_exports__["a"] = (App);
 
 /***/ }),
 /* 37 */
@@ -4465,26 +4465,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_materialize__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_materialize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_materialize__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_query_string__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_query_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_query_string__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modal__ = __webpack_require__(86);
-var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var Cards=function(_React$Component){_inherits(Cards,_React$Component);function Cards(props){_classCallCheck(this,Cards);var _this=_possibleConstructorReturn(this,(Cards.__proto__||Object.getPrototypeOf(Cards)).call(this,props));_this.state={recommendations:{tracks:[{album:{artists:[{name:''}],name:'',external_urls:{spotify:''},images:[{},{},{url:''}]}}]},recommendationsId:0};_this.getBandId=_this.getBandId.bind(_this);_this.getRecommendations=_this.getRecommendations.bind(_this);_this.openModal=_this.openModal.bind(_this);_this.closeModal=_this.closeModal.bind(_this);return _this;}_createClass(Cards,[{key:'openModal',value:function openModal(){this.setState({modalIsOpen:true});}},{key:'closeModal',value:function closeModal(){this.setState({modalIsOpen:false});}},{key:'onRecommendationsClick',value:function onRecommendationsClick(artist,cardId){var _this2=this;this.openModal();var parsed=__WEBPACK_IMPORTED_MODULE_3_query_string___default.a.parse(window.location.search);var access_token=parsed.access_token;// use access token to get band ID, then get recs
-var bandLookup='https://api.spotify.com/v1/search?';var query="q="+artist+"&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";console.log('looking up ',artist);fetch(bandLookup+query,{headers:{"Authorization":'Bearer '+access_token}}).then(function(response){return response.json();}).then(function(json){console.log(json);var id=json.artists.items[0].id;console.log('id',id);return id;}).catch(function(error){console.log('Request failed',error);}).then(function(id){fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists="+id+"&min_energy=0.4&min_popularity=50",{headers:{"Authorization":"Bearer "+access_token}}).then(function(response){return response.json();}).then(function(recommendations){console.log('Recommendations',recommendations);_this2.setState({recommendations:recommendations,recommendationsId:cardId});}).catch(function(error){console.log('Request failed',error);});}).catch(function(err){return console.log(err);});}},{key:'getBandId',value:function getBandId(artist,accessToken){var bandLookup='https://api.spotify.com/v1/search?';var query="q="+artist+"&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";console.log('looking up ',artist);fetch(bandLookup+query,{headers:{"Authorization":'Bearer '+accessToken}}).then(function(response){return response.json();}).then(function(json){console.log(json);var id=json.artists.items[0].id;console.log('id',id);return id;}).catch(function(error){console.log('Request failed',error);});}},{key:'getRecommendations',value:function getRecommendations(id){console.log('got ID',id);//     fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
-//         headers: {
-//             "Accept": "application/json",
-//             "Content-Type": "application/json",
-//             "Authorization": "Bearer BQCHowy1iH9mJ-A_w3xlu0AjPV6YRyV_p_2pqqsudnUg2aW2SJ7LumQBFsbOnDyAWnN2_5XntLDdPZEXMhwGv8RS4zAwbw2y0V-KIb1ZLCh0YjvCiNDei7ImR_rx7SqgAuTPuN4"
-//         }
-//     })
-//     .then(response => response.json())
-//     .then(recommendations => {
-//         console.log('Recommendations', recommendations)
-//         return recommendations;
-//     })
-//     .catch(function(error) {
-//         console.log('Request failed', error)
-//     })
-}},{key:'shuffle',value:function shuffle(array){var currentIndex=array.length,temporaryValue,randomIndex;while(0!==currentIndex){randomIndex=Math.floor(Math.random()*currentIndex);currentIndex-=1;temporaryValue=array[currentIndex];array[currentIndex]=array[randomIndex];array[randomIndex]=temporaryValue;}return array;}},{key:'render',value:function render(){var _this3=this;var recs=this.state.recommendations.tracks;console.log('recs',recs);return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('ul',{className:'flex-container'},this.props.listings.map(function(listing,index){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('li',{key:index,className:'flex-item'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["CardPanel"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img',{src:listing.albumcover,className:'shadow',style:{maxHeight:"200px",width:"100%",objectFit:"contain"}}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h5',null,listing.artist),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i',null,listing.album),' (',listing.year,')'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["Chip"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('b',null,'From:'),'  ',listing.addedby),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["Chip"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('b',null,'Lyrics?'),' ',listing.lyrics)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["Button"],{'data-video':listing.audio,onClick:_this3.props.updateNowPlaying},'Listen'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["Button"],{onClick:function onClick(){_this3.onRecommendationsClick(listing.artist,index);}},'Get Recommendations'),_this3.state.recommendationsId==index&&_typeof(_this3.state.recommendations.tracks)!=undefined?__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__modal__["a" /* default */],{isOpen:_this3.state.modalIsOpen,closeModal:_this3.closeModal,contentLabel:'Recommendations',recommendations:_this3.state.recommendations.tracks}):__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null)));}));}}]);return Cards;}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);/* harmony default export */ __webpack_exports__["a"] = (Cards);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modal__ = __webpack_require__(83);
+var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var Cards=function(_React$Component){_inherits(Cards,_React$Component);function Cards(props){_classCallCheck(this,Cards);var _this=_possibleConstructorReturn(this,(Cards.__proto__||Object.getPrototypeOf(Cards)).call(this,props));_this.state={recommendations:{tracks:[{album:{artists:[{name:''}],name:'',external_urls:{spotify:''},images:[{},{},{url:''}]}}]},modalIsOpen:false,recommendationsId:0};_this.clearRecommndations=_this.clearRecommndations.bind(_this);_this.getBandId=_this.getBandId.bind(_this);_this.openModal=_this.openModal.bind(_this);_this.closeModal=_this.closeModal.bind(_this);return _this;}_createClass(Cards,[{key:'clearRecommndations',value:function clearRecommndations(){var empty={tracks:[{album:{artists:[{name:''}],name:'',external_urls:{spotify:''},images:[{},{},{url:''}]}}]};this.setState({recommendations:empty});}},{key:'closeModal',value:function closeModal(){this.setState({modalIsOpen:false});}},{key:'openModal',value:function openModal(){this.setState({modalIsOpen:true});}},{key:'onRecommendationsClick',value:function onRecommendationsClick(artist,cardId){var _this2=this;this.clearRecommndations();this.openModal();var access_token=this.props.token;// use access token to get band ID, then get recs
+// console.log('token? ', access_token)
+var bandLookup='https://api.spotify.com/v1/search?';var query="q="+artist+"&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";console.log('looking up ',artist);fetch(bandLookup+query,{headers:{"Authorization":'Bearer '+access_token}}).then(function(response){return response.json();}).then(function(json){var id=json.artists.items[0].id;return id;}).catch(function(error){console.log('Request failed',error);}).then(function(id){fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists="+id+"&min_energy=0.4&min_popularity=50",{headers:{"Authorization":"Bearer "+access_token}}).then(function(response){return response.json();}).then(function(recommendations){// console.log('Recommendations', recommendations)
+_this2.setState({recommendations:recommendations,recommendationsId:cardId});}).catch(function(error){console.log('Request failed',error);});}).catch(function(err){return console.log(err);});}},{key:'getBandId',value:function getBandId(artist,accessToken){var bandLookup='https://api.spotify.com/v1/search?';var query="q="+artist+"&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";// console.log('looking up ', artist);
+fetch(bandLookup+query,{headers:{"Authorization":'Bearer '+accessToken}}).then(function(response){return response.json();}).then(function(json){var id=json.artists.items[0].id;return id;}).catch(function(error){console.log('Request failed',error);});}},{key:'render',value:function render(){var _this3=this;var recs=this.state.recommendations.tracks;var buttonStyle={backgroundColor:"#fff",color:"#181818",boxShadow:"0 5 0 0"};return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('ul',{className:'flex-container'},this.props.listings.map(function(listing,index){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('li',{key:index,className:'flex-item'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["CardPanel"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img',{src:listing.albumcover,className:'shadow',style:{maxHeight:"200px",width:"100%",objectFit:"contain"}}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h5',null,listing.artist),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i',null,listing.album),' (',listing.year,')'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{className:'chip'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('b',null,'From:'),'  ',listing.addedby),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{className:'chip'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('b',null,'Lyrics?'),' ',listing.lyrics)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["Button"],{className:'waves-effect waves-light btn','data-video':listing.audio,onClick:_this3.props.updateNowPlaying,style:buttonStyle},'Listen'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_materialize__["Button"],{className:'waves-effect waves-light btn',onClick:function onClick(){_this3.onRecommendationsClick(listing.artist,index);},style:buttonStyle},'Similar'),_this3.state.recommendationsId==index&&_typeof(_this3.state.recommendations.tracks)!=undefined?__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__modal__["a" /* default */],{isOpen:_this3.state.modalIsOpen,closeModal:_this3.closeModal,contentLabel:'Recommendations',recommendations:_this3.state.recommendations.tracks}):__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null)));}));}}]);return Cards;}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);/* harmony default export */ __webpack_exports__["a"] = (Cards);
 
 /***/ }),
 /* 43 */
@@ -9087,345 +9073,6 @@ exports.default = Toast;
 
 /***/ }),
 /* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-const strictUriEncode = __webpack_require__(84);
-const decodeComponent = __webpack_require__(85);
-
-function encoderForArrayFormat(options) {
-	switch (options.arrayFormat) {
-		case 'index':
-			return (key, value, index) => {
-				return value === null ? [
-					encode(key, options),
-					'[',
-					index,
-					']'
-				].join('') : [
-					encode(key, options),
-					'[',
-					encode(index, options),
-					']=',
-					encode(value, options)
-				].join('');
-			};
-		case 'bracket':
-			return (key, value) => {
-				return value === null ? [encode(key, options), '[]'].join('') : [
-					encode(key, options),
-					'[]=',
-					encode(value, options)
-				].join('');
-			};
-		default:
-			return (key, value) => {
-				return value === null ? encode(key, options) : [
-					encode(key, options),
-					'=',
-					encode(value, options)
-				].join('');
-			};
-	}
-}
-
-function parserForArrayFormat(options) {
-	let result;
-
-	switch (options.arrayFormat) {
-		case 'index':
-			return (key, value, accumulator) => {
-				result = /\[(\d*)\]$/.exec(key);
-
-				key = key.replace(/\[\d*\]$/, '');
-
-				if (!result) {
-					accumulator[key] = value;
-					return;
-				}
-
-				if (accumulator[key] === undefined) {
-					accumulator[key] = {};
-				}
-
-				accumulator[key][result[1]] = value;
-			};
-		case 'bracket':
-			return (key, value, accumulator) => {
-				result = /(\[\])$/.exec(key);
-				key = key.replace(/\[\]$/, '');
-
-				if (!result) {
-					accumulator[key] = value;
-					return;
-				}
-
-				if (accumulator[key] === undefined) {
-					accumulator[key] = [value];
-					return;
-				}
-
-				accumulator[key] = [].concat(accumulator[key], value);
-			};
-		default:
-			return (key, value, accumulator) => {
-				if (accumulator[key] === undefined) {
-					accumulator[key] = value;
-					return;
-				}
-
-				accumulator[key] = [].concat(accumulator[key], value);
-			};
-	}
-}
-
-function encode(value, options) {
-	if (options.encode) {
-		return options.strict ? strictUriEncode(value) : encodeURIComponent(value);
-	}
-
-	return value;
-}
-
-function decode(value, options) {
-	if (options.decode) {
-		return decodeComponent(value);
-	}
-
-	return value;
-}
-
-function keysSorter(input) {
-	if (Array.isArray(input)) {
-		return input.sort();
-	}
-
-	if (typeof input === 'object') {
-		return keysSorter(Object.keys(input))
-			.sort((a, b) => Number(a) - Number(b))
-			.map(key => input[key]);
-	}
-
-	return input;
-}
-
-function extract(input) {
-	const queryStart = input.indexOf('?');
-	if (queryStart === -1) {
-		return '';
-	}
-	return input.slice(queryStart + 1);
-}
-
-function parse(input, options) {
-	options = Object.assign({decode: true, arrayFormat: 'none'}, options);
-
-	const formatter = parserForArrayFormat(options);
-
-	// Create an object with no prototype
-	const ret = Object.create(null);
-
-	if (typeof input !== 'string') {
-		return ret;
-	}
-
-	input = input.trim().replace(/^[?#&]/, '');
-
-	if (!input) {
-		return ret;
-	}
-
-	for (const param of input.split('&')) {
-		let [key, value] = param.replace(/\+/g, ' ').split('=');
-
-		// Missing `=` should be `null`:
-		// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
-		value = value === undefined ? null : decode(value, options);
-
-		formatter(decode(key, options), value, ret);
-	}
-
-	return Object.keys(ret).sort().reduce((result, key) => {
-		const value = ret[key];
-		if (Boolean(value) && typeof value === 'object' && !Array.isArray(value)) {
-			// Sort object keys, not values
-			result[key] = keysSorter(value);
-		} else {
-			result[key] = value;
-		}
-
-		return result;
-	}, Object.create(null));
-}
-
-exports.extract = extract;
-exports.parse = parse;
-
-exports.stringify = (obj, options) => {
-	const defaults = {
-		encode: true,
-		strict: true,
-		arrayFormat: 'none'
-	};
-
-	options = Object.assign(defaults, options);
-
-	if (options.sort === false) {
-		options.sort = () => {};
-	}
-
-	const formatter = encoderForArrayFormat(options);
-
-	return obj ? Object.keys(obj).sort(options.sort).map(key => {
-		const value = obj[key];
-
-		if (value === undefined) {
-			return '';
-		}
-
-		if (value === null) {
-			return encode(key, options);
-		}
-
-		if (Array.isArray(value)) {
-			const result = [];
-
-			for (const value2 of value.slice()) {
-				if (value2 === undefined) {
-					continue;
-				}
-
-				result.push(formatter(key, value2, result.length));
-			}
-
-			return result.join('&');
-		}
-
-		return encode(key, options) + '=' + encode(value, options);
-	}).filter(x => x.length > 0).join('&') : '';
-};
-
-exports.parseUrl = (input, options) => {
-	return {
-		url: input.split('?')[0] || '',
-		query: parse(extract(input), options)
-	};
-};
-
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-module.exports = str => encodeURIComponent(str).replace(/[!'()*]/g, x => `%${x.charCodeAt(0).toString(16).toUpperCase()}`);
-
-
-/***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var token = '%[a-f0-9]{2}';
-var singleMatcher = new RegExp(token, 'gi');
-var multiMatcher = new RegExp('(' + token + ')+', 'gi');
-
-function decodeComponents(components, split) {
-	try {
-		// Try to decode the entire string first
-		return decodeURIComponent(components.join(''));
-	} catch (err) {
-		// Do nothing
-	}
-
-	if (components.length === 1) {
-		return components;
-	}
-
-	split = split || 1;
-
-	// Split the array in 2 parts
-	var left = components.slice(0, split);
-	var right = components.slice(split);
-
-	return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
-}
-
-function decode(input) {
-	try {
-		return decodeURIComponent(input);
-	} catch (err) {
-		var tokens = input.match(singleMatcher);
-
-		for (var i = 1; i < tokens.length; i++) {
-			input = decodeComponents(tokens, i).join('');
-
-			tokens = input.match(singleMatcher);
-		}
-
-		return input;
-	}
-}
-
-function customDecodeURIComponent(input) {
-	// Keep track of all the replacements and prefill the map with the `BOM`
-	var replaceMap = {
-		'%FE%FF': '\uFFFD\uFFFD',
-		'%FF%FE': '\uFFFD\uFFFD'
-	};
-
-	var match = multiMatcher.exec(input);
-	while (match) {
-		try {
-			// Decode as big chunks as possible
-			replaceMap[match[0]] = decodeURIComponent(match[0]);
-		} catch (err) {
-			var result = decode(match[0]);
-
-			if (result !== match[0]) {
-				replaceMap[match[0]] = result;
-			}
-		}
-
-		match = multiMatcher.exec(input);
-	}
-
-	// Add `%C2` at the end of the map to make sure it does not replace the combinator before everything else
-	replaceMap['%C2'] = '\uFFFD';
-
-	var entries = Object.keys(replaceMap);
-
-	for (var i = 0; i < entries.length; i++) {
-		// Replace all decoded components
-		var key = entries[i];
-		input = input.replace(new RegExp(key, 'g'), replaceMap[key]);
-	}
-
-	return input;
-}
-
-module.exports = function (encodedURI) {
-	if (typeof encodedURI !== 'string') {
-		throw new TypeError('Expected `encodedURI` to be of type `string`, got `' + typeof encodedURI + '`');
-	}
-
-	try {
-		encodedURI = encodedURI.replace(/\+/g, ' ');
-
-		// Try the built in decoder first
-		return decodeURIComponent(encodedURI);
-	} catch (err) {
-		// Fallback to a more advanced decoder
-		return customDecodeURIComponent(encodedURI);
-	}
-};
-
-
-/***/ }),
-/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9433,16 +9080,16 @@ module.exports = function (encodedURI) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_materialize__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_materialize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_materialize__);
-var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _defineProperty(obj,key,value){if(key in obj){Object.defineProperty(obj,key,{value:value,enumerable:true,configurable:true,writable:true});}else{obj[key]=value;}return obj;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var Cards=function(_React$Component){_inherits(Cards,_React$Component);function Cards(props){_classCallCheck(this,Cards);return _possibleConstructorReturn(this,(Cards.__proto__||Object.getPrototypeOf(Cards)).call(this,props));}_createClass(Cards,[{key:'render',value:function render(){var recs=this.props.recommendations;var modalStyles=_defineProperty({position:"fixed",zIndex:"9999",padding:"20px",left:"0",top:"0",margin:"0 auto",width:"100%",height:"100%",overflow:"auto",backgroundColor:"rgb(0,0,0)"},'backgroundColor',"rgba(0,0,0,0.8)");var recStyle={maxWidth:"500px",margin:"0 auto"};var colStyle={backgroundColor:"#fff",width:"50vw",height:"90vh",overflow:"auto"};return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null,this.props.isOpen?__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{style:modalStyles},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_materialize__["Col"],{m:6,s:12,offset:'m3 s2',style:colStyle},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_materialize__["Button"],{onClick:this.props.closeModal},'close'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_materialize__["Collection"],{header:'Recommendations'},(typeof recs==='undefined'?'undefined':_typeof(recs))!=undefined&&recs.length>1?__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null,recs.map(function(track,index){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{key:index,style:recStyle},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_materialize__["CollectionItem"],{href:track.album.external_urls.spotify,target:'_blank'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img',{src:track.album.images[2].url,style:{margin:"5px",float:"left"}}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,track.album.artists[0].name),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i',null,track.album.name))));})):__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null,'Loading...')))):__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null));}}]);return Cards;}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);/* harmony default export */ __webpack_exports__["a"] = (Cards);
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _defineProperty(obj,key,value){if(key in obj){Object.defineProperty(obj,key,{value:value,enumerable:true,configurable:true,writable:true});}else{obj[key]=value;}return obj;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var Modal=function(_React$Component){_inherits(Modal,_React$Component);function Modal(props){_classCallCheck(this,Modal);return _possibleConstructorReturn(this,(Modal.__proto__||Object.getPrototypeOf(Modal)).call(this,props));}_createClass(Modal,[{key:'render',value:function render(){var _modalStyles;var closeBar={width:"100%",margin:"5px",backgroundColor:"#fff",color:"#181818",boxShadow:"0 5 0 0"};var modalStyles=(_modalStyles={position:"fixed",zIndex:"9999",padding:"20px",left:"0",top:"0",margin:"0 auto",width:"100%",height:"100%",overflow:"auto",backgroundColor:"rgb(0,0,0)"},_defineProperty(_modalStyles,'backgroundColor',"rgba(0,0,0,0.8)"),_defineProperty(_modalStyles,'textAlign',"center"),_modalStyles);var recStyle={maxWidth:"500px",margin:"0 auto"};var colStyle={display:"inline-block",backgroundColor:"#fff",width:"80vw",height:"90vh",overflow:"auto"};return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null,this.props.isOpen?__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_materialize__["Row"],{style:modalStyles},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{style:colStyle},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a',{className:'waves-effect waves-light btn modal-trigger',onClick:this.props.closeModal,style:closeBar},'close'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('ul',{className:'flex-container'},this.props.recommendations.map(function(rec,index){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('li',{key:index,className:'flex-item'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{className:'card-panel'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a',{href:rec.album.external_urls.spotify,target:'_blank'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img',{src:rec.album.images[1].url,className:'shadow',style:{maxHeight:"300px",objectFit:"contain"}})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h5',null,rec.album.artists[0].name),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p',null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i',null,rec.album.name))));}))))):__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',null));}}]);return Modal;}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);/* harmony default export */ __webpack_exports__["a"] = (Modal);
 
 /***/ }),
-/* 87 */
+/* 84 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 88 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9479,11 +9126,11 @@ navigator.serviceWorker.ready.then(function(registration){registration.unregiste
 registerValidSW(swUrl);}}).catch(function(){console.log('No internet connection found. App is running in offline mode.');});}function unregister(){if('serviceWorker'in navigator){navigator.serviceWorker.ready.then(function(registration){registration.unregister();});}}
 
 /***/ }),
-/* 89 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {const fs = __webpack_require__(90)
-const path = __webpack_require__(91)
+/* WEBPACK VAR INJECTION */(function(process) {const fs = __webpack_require__(87)
+const path = __webpack_require__(88)
 
 /*
  * Parses a string or buffer into an object
@@ -9563,13 +9210,13 @@ module.exports.parse = parse
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)))
 
 /***/ }),
-/* 90 */
+/* 87 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 91 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -9801,4 +9448,4 @@ var substr = 'ab'.substr(-1) === 'b'
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.a21d74d2.js.map
+//# sourceMappingURL=main.3be23e72.js.map
