@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "dotenv": "^6.0.0",
     "get-sheet-done": "^0.1.4",
     "query-string": "^6.1.0",
     "react": "^16.4.2",
@@ -13,7 +12,8 @@
     "react-scripts": "1.1.5"
   },
   "devDependencies": {
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "dotenv": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
