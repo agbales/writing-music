@@ -1,21 +1,26 @@
 {
-  "name": "writing-music",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "dotenv": "^6.0.0",
-    "get-sheet-done": "^0.1.4",
-    "query-string": "^6.1.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-materialize": "^2.4.5",
-    "react-modal": "^3.5.1",
-    "react-scripts": "1.1.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "express-server",
+    "version": "0.2.0",
+    "description": "Express server",
+    "main": "server.js",
+    "engines": {
+        "node": "8.1.4",
+        "npm": "6.1.0"
+    },
+    "scripts": {
+        "start": "node server.js",
+        "heroku-postbuild": "cd client && npm install && npm run build"
+    },
+    "dependencies": {
+        "assert": "^1.4.1",
+        "compression": "^1.7.3",
+        "dotenv": "^6.0.0",
+        "express": "^4.16.3",
+        "express-minify": "^1.0.0",
+        "helmet": "^3.13.0",
+        "normalize.css": "^8.0.0",
+        "querystring": "^0.2.0",
+        "react-router-dom": "^4.3.1",
+        "request": "^2.88.0"
+    }
 }
