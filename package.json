@@ -29,5 +29,10 @@
         "react": "^16.4.1",
         "react-router-dom": "^4.3.1",
         "request": "^2.88.0"
-    }
+    },
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
 }
