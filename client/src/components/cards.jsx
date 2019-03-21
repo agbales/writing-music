@@ -52,44 +52,48 @@ export default class Cards extends React.Component {
 
     onRecommendationsClick(artist, cardId) {
         this.clearRecommndations();
-        this.openModal()
-
         const access_token = this.props.token;
-        const bandLookup = 'https://api.spotify.com/v1/search?';
-        const query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
-        
-        fetch(bandLookup + query, {
-                headers: {
-                    "Authorization": 'Bearer ' + access_token,
-                }
-            })
-            .then(response => response.json())
-            .then(json => {
-                let id = json.artists.items[0].id;
-                return id;
-            })
-            .catch(function(error) {
-                console.log('Request failed', error)
-            })
-        .then(id => {
-            fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
-                headers: {
-                    "Authorization": "Bearer " + access_token
-                }
-            })
-            .then(response => response.json())
-            .then(recommendations => {
-                // console.log('Recommendations', recommendations)
-                this.setState({ 
-                    recommendations : recommendations,
-                    recommendationsId : cardId
+        if (access_token) {
+            this.openModal()
+            const bandLookup = 'https://api.spotify.com/v1/search?';
+            const query = "q=" + artist + "&type=artist&client_id=c2e56ee7705d4d919e509dc827dfb6a9";
+            
+            fetch(bandLookup + query, {
+                    headers: {
+                        "Authorization": 'Bearer ' + access_token,
+                    }
+                })
+                .then(response => response.json())
+                .then(json => {
+                    let id = json.artists.items[0].id;
+                    return id;
+                })
+                .catch(function(error) {
+                    console.log('Request failed', error)
+                })
+            .then(id => {
+                fetch("https://api.spotify.com/v1/recommendations?market=US&seed_artists=" + id + "&min_energy=0.4&min_popularity=50", {
+                    headers: {
+                        "Authorization": "Bearer " + access_token
+                    }
+                })
+                .then(response => response.json())
+                .then(recommendations => {
+                    // console.log('Recommendations', recommendations)
+                    this.setState({ 
+                        recommendations : recommendations,
+                        recommendationsId : cardId
+                    })
+                })
+                .catch(function(error) {
+                    console.log('Request failed', error)
                 })
             })
-            .catch(function(error) {
-                console.log('Request failed', error)
-            })
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
+        } else {
+            alert('We are on the line with Spotify getting you access now. Try again in a few seconds :)')
+        }
+        
     }
 
     getBandId(artist, accessToken) {
